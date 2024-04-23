@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.ganyuss.discordsdk/Editor/UI/EditorMessageWindow.uss?fileID=7433441132597879392&amp;guid=2d6bb4275eb67c84fa44532bfc5dc669&amp;type=3#EditorMessageWindow" />
+    <ui:Label text="Mock event to send" name="title-label" class="label-header" style="margin-top: 2px; margin-left: 4px;" />
+    <ui:DropdownField label="Event Type" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="event-type-dropdown" />
+    <ui:VisualElement name="event-container-element" style="margin-top: 10px; margin-bottom: 10px;" />
+    <ui:VisualElement name="button-container-element" style="align-items: flex-end;">
+        <ui:Button text="Send" parse-escape-sequences="true" display-tooltip-when-elided="true" name="send-event-button" class="action-button" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,38 @@
+﻿using System;
+using DiscordActivitySdk.Messages.Events.Responses;
+using JetBrains.Annotations;
+using UnityEngine.Scripting;
+
+namespace DiscordActivitySdk.Messages.Commands
+{
+    /// <summary>
+    /// Returns permissions for the current user in the currently connected channel.
+    /// <br /><br />
+    /// <b>Supported Platforms</b>
+    /// <list type="table">
+    ///     <item>
+    ///         <term>Web</term>
+    ///         <description>✅</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>iOS</term>
+    ///         <description>✅</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>Android</term>
+    ///         <description>✅</description>
+    ///     </item>
+    /// </list>
+    /// <br />
+    /// <b>Scopes required</b>
+    /// <ul>
+    ///     <li><see cref="Entitlements.GuildsMemberRead"/></li>
+    /// </ul>
+    /// </summary>
+    [PublicAPI]
+    [Serializable]
+    public class GetChannelPermissionsDiscordCommand : FrameDiscordCommand<GetChannelPermissionsResponse>
+    {
+        internal override Command Command => Command.GET_CHANNEL_PERMISSIONS;
+    }
+}
