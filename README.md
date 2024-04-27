@@ -6,21 +6,26 @@ as well as listening for events.
 This package is meant to work in Unity WebGL builds, and only work on 
 the client side of the Discord activity.
 
-> ⛔ This is **not** a package to implement discord's rich presence feature.   
+> ⛔ This is **not** a package to implement discord's rich presence feature.
+
+> ⚠️ Just like Discord's [embedded app SDK package](https://github.com/discord/embedded-app-sdk), this
+> package only serves for the frontend part of the Discord activity, to interact with the Discord application.
+> On top of that, you will need to setup a HTTP server to serve this WebGL build, and game server(s) for
+> your multiplayer game to work.
+
+## Context
+
+This package is a Unity implementation of Discord's [embedded app SDK package](https://github.com/discord/embedded-app-sdk).
+It implements all its features and more. This implementation is based on
+the version 1.2.1 of the native SDK.
+
+If you are familiar with this SDK, you can skip directly to the [Differences and Additions](#differences-and-additions)
+section.
 
 ## Installing the SDK
 
 To install the SDK, clone the content of this repository into a folder in the 
 `Packages` folder of your project.
-
-## Context
-
-This package is a Unity implementation of [Discord's embedded app SDK package](https://github.com/discord/embedded-app-sdk).
-It implements all its features and more. This implementation is based on
-the version 1.2.0 of the native SDK. 
-
-If you are familiar with this SDK, you can skip directly to the [Differences and Additions](#differences-and-additions) 
-section.
 
 ## Getting started
 
@@ -45,7 +50,9 @@ To initialise the Discord SDK, you will first need to create a [`DiscordSdk`](Ru
 Here is an example:
 
 ```csharp
-var discordConfig = new DiscordSdkConfiguration("**my discord client ID**"); // You can find your client ID in the Discord developer portal: https://discord.com/developers/applications 
+// !!! CODE TO COMPLETE !!! 
+// You can find your client ID in the Discord developer portal: https://discord.com/developers/applications 
+var discordConfig = new DiscordSdkConfiguration(**YOUR DISCORD CLIENT ID**);
 
 // For the discord SDK to work correctly in editor, you will have to override some values
 #if UNITY_EDITOR
@@ -75,10 +82,11 @@ a request to your server, and your server must query Discord's.
 
 You can see how it is done in Discord's example [here](https://github.com/discord/embedded-app-sdk/blob/main/examples/discord-activity-starter/packages/server/src/app.ts).
 
-On the client side, there is a helper method to initialise the SDK like so:
+On the client side, there is a helper method to initialise the SDK. You can implement it by completing this code:
 ```csharp
 var authorizeCommand = new AuthorizeDiscordCommand(
-    clientId: "**my discord client ID**",
+    // !!! CODE TO COMPLETE !!! 
+    clientId: **YOUR DISCORD CLIENT ID**,
     AuthorizeResponseType.Code,
     scopes: new[]
     {
@@ -93,7 +101,17 @@ var authorizeCommand = new AuthorizeDiscordCommand(
 // This delegate should hold your code requesting your backend to get the access token
 Func<string, Task<string>> authorizeCodeToAccessToken = async (authorizeCode) =>
 {
-    // Fetch the access token asynchronously
+    var applicationUri = new Uri(Application.absoluteURL);
+    
+    // !!! CODE TO COMPLETE !!! 
+    var requestTarget = $"https://{applicationUri.Authority}/**YOUR TOKEN ENDPOINT**?code={authorizeCode}";
+
+    var request = UnityWebRequest.Get(requestTarget);
+    await request.SendWebRequest();
+
+    
+    // !!! CODE TO COMPLETE !!! 
+    // You need to get the access token from your backend's response (request.downloadHandler.text)
     return accessToken;
 };
 
